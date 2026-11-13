@@ -92,9 +92,6 @@ class _ChatPageState extends State<ChatPage>{
               TextField(
                 style: mTextStyle20(mColor: Colors.white),
                 controller: queryController,
-                onEditingComplete: (){
-                  Provider.of<MsgProvider>(context, listen: false).sendMessages(message: queryController.text);
-                },
                 onSubmitted: (value){
                   Provider.of<MsgProvider>(context, listen: false).sendMessages(message: value);
                 },
@@ -188,6 +185,9 @@ class _ChatPageState extends State<ChatPage>{
                           repeatForever: false,
                           displayFullTextOnTap: true,
                           isRepeatingAnimation: false,
+                          onTap: (){
+                            context.read<MsgProvider>().updateMsgRead(msgModel);
+                          },
                           onFinished: (){
                             context.read<MsgProvider>().updateMsgRead(msgModel);
                           },
